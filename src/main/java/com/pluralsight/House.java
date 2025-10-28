@@ -25,9 +25,6 @@ public class House extends Asset {
         this.address = address;
     }
 
-    public int getCondition() {
-        return condition;
-    }
 
     public void setCondition(int condition) {
         this.condition = condition;
@@ -49,11 +46,24 @@ public class House extends Asset {
         this.lotSize = lotSize;
     }
 
+    public int getCondition(){
+        double value = this.getValue();
+        if (value >= 180) {
+            return 1;
+        }else if (value < 179.99 && value >= 130){
+            return 2;
+        } else if (value < 129.99 && value >= 90){
+            return 3;
+        }else{
+            return 4;
+        }
+    }
+
     @Override
     public double getValue() {
         double value = this.originalCost / this.squareFoot; // original cost divided by squareFoot is value
         value = value + (this.lotSize * .25); //
-        return originalCost;
+        return value;
     }
 
     //house's value is determined as
